@@ -1,5 +1,6 @@
 module Wink
   module Config
+    attr_accessor :endpoint
     attr_accessor :client_id
     attr_accessor :client_secret
     attr_accessor :access_token
@@ -10,10 +11,15 @@ module Wink
     end
 
     def reset
-      @client_id = ENV['WINK_CLIENT_ID']
+      @api_endpoint  = ENV['WINK_ENDPOINT']
+      @client_id     = ENV['WINK_CLIENT_ID']
       @client_secret = ENV['WINK_CLIENT_SECRET']
-      @access_token = ENV['WINK_ACCESS_TOKEN']
+      @access_token  = ENV['WINK_ACCESS_TOKEN']
       @refresh_token = ENV['WINK_REFRESH_TOKEN']
+    end
+
+    def endpoint
+      @endpoint || 'https://winkapi.quirky.com'
     end
 
     def client_id
