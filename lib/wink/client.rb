@@ -70,3 +70,4 @@ module Wink
   end
 end
 
+require "wink/client/binary_switch"
