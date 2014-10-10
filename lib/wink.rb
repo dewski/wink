@@ -1,5 +1,6 @@
 require "wink/version"
+require "wink/config"
 
 module Wink
-  # Your code goes here...
+  extend Config
 end
