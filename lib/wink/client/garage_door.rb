@@ -56,7 +56,7 @@ module Wink
 
       def refresh
         response = client.post('/garage_doors{/garage_door}/refresh', :garage_door => garage_door_id)
-        response.success?
+        response.body["data"]
       end
 
       private

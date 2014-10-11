@@ -56,7 +56,7 @@ module Wink
 
       def refresh
         response = client.post('/binary_switches{/binary_switch}/refresh', :binary_switch => binary_switch_id)
-        response.success?
+        response.body["data"]
       end
 
       private
