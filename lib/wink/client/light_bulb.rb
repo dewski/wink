@@ -19,8 +19,8 @@ module Wink
     class LightBulb
       def initialize(client, light_bulb_id = nil, attributes = {})
         if light_bulb_id.is_a?(Hash)
-          light_bulb_id = light_bulb_id.delete("light_bulb_id")
           attributes = light_bulb_id
+          light_bulb_id = attributes["light_bulb_id"]
         end
 
         @client        = client
