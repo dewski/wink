@@ -28,12 +28,9 @@ module Wink
         @name             = attributes.delete("name")
       end
 
-      attr_reader :client, :binary_switch_id
+      attr_reader :client, :binary_switch_id, :name
 
       alias id binary_switch_id
-
-      # Attributes
-      attr_reader :name
 
       def users
         response = client.get('/binary_switches{/binary_switch}/users', :binary_switch => binary_switch_id)

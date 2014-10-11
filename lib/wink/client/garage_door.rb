@@ -28,7 +28,7 @@ module Wink
         @name           = attributes.delete("name")
       end
 
-      attr_reader :client, :garage_door_id
+      attr_reader :client, :garage_door_id, :name
 
       alias id garage_door_id
 
