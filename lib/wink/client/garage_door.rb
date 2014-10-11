@@ -9,6 +9,13 @@ module Wink
       GarageDoor.new self, garage_door_id
     end
 
+    def garage_doors
+      response = get('/users/me/garage_doors')
+      response.body["data"].collect do |item|
+        GarageDoor.new(self, item["garage_door_id"])
+      end
+    end
+
     class GarageDoor
       def initialize(client, garage_door_id = nil)
         @client         = client

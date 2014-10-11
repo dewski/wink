@@ -9,6 +9,13 @@ module Wink
       LightBulb.new self, light_bulb_id
     end
 
+    def light_bulbs
+      response = get('/users/me/light_bulbs')
+      response.body["data"].collect do |item|
+        LightBulb.new(self, item["light_bulb_id"])
+      end
+    end
+
     class LightBulb
       def initialize(client, light_bulb_id = nil)
         @client        = client

@@ -9,6 +9,13 @@ module Wink
       BinarySwitch.new self, binary_switch_id
     end
 
+    def binary_switches
+      response = get('/users/me/binary_switches')
+      response.body["data"].collect do |item|
+        BinarySwitch.new(self, item["binary_switch_id"])
+      end
+    end
+
     class BinarySwitch
       def initialize(client, binary_switch_id = nil)
         @client           = client
