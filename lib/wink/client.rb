@@ -5,6 +5,19 @@ require "addressable/template"
 
 module Wink
   class Client
+    def devices
+      response = get('/users/me/wink_devices')
+      response.body["data"].collect do |device|
+        if device.key?("garage_door_id")
+          GarageDoor.new(self, device)
+        elsif device.key?("light_bulb_id")
+          LightBulb.new(self, device)
+        elsif device.key?("binary_switch_id")
+          BinarySwitch.new(self, device)
+        end
+      end
+    end
+
     def connection
       @connection ||= Faraday.new(Wink.endpoint) do |conn|
         conn.options[:timeout]      = 5
