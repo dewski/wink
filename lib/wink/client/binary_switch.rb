@@ -6,7 +6,7 @@ module Wink
     #
     # Returns a BinarySwitch instance.
     def binary_switch(binary_switch_id = nil)
-      BinarySwitch.new self, binary_switch_id
+      BinarySwitch.new(self, binary_switch_id)
     end
 
     def binary_switches

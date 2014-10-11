@@ -6,20 +6,20 @@ module Wink
     #
     # Returns a BinarySwitch instance.
     def garage_door(garage_door_id = nil)
-      GarageDoor.new self, garage_door_id
+      GarageDoor.new(self, garage_door_id)
     end
 
     def garage_doors
       response = get('/users/me/garage_doors')
       response.body["data"].collect do |item|
-        GarageDoor.new(self, item["garage_door_id"])
+        GarageDoor.new(self, item)
       end
     end
 
     class GarageDoor
       def initialize(client, garage_door_id = nil, attributes = {})
         if garage_door_id.is_a?(Hash)
-          garage_door_id = garage_door_id.delete("light_bulb_id")
+          garage_door_id = garage_door_id.delete("garage_door_id")
           attributes = garage_door_id
         end
 

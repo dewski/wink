@@ -9,11 +9,11 @@ module Wink
       response = get('/users/me/wink_devices')
       response.body["data"].collect do |device|
         if device.key?("garage_door_id")
-          GarageDoor.new(self, device)
+          garage_door(device)
         elsif device.key?("light_bulb_id")
-          LightBulb.new(self, device)
+          light_bulb(device)
         elsif device.key?("binary_switch_id")
-          BinarySwitch.new(self, device)
+          binary_switch(device)
         end
       end
     end
