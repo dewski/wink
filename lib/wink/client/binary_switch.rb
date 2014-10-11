@@ -44,7 +44,7 @@ module Wink
       end
 
       def powered?
-        binary_switch["desired_state"]["powered"]
+        binary_switch["last_reading"]["powered"]
       end
 
       def refresh
