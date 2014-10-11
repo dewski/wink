@@ -19,7 +19,7 @@ module Wink
     class GarageDoor
       def initialize(client, garage_door_id = nil, attributes = {})
         if garage_door_id.is_a?(Hash)
-          garage_door_id = attributes.delete("light_bulb_id")
+          garage_door_id = garage_door_id.delete("light_bulb_id")
           attributes = garage_door_id
         end
 
