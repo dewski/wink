@@ -12,17 +12,26 @@ module Wink
     def binary_switches
       response = get('/users/me/binary_switches')
       response.body["data"].collect do |item|
-        BinarySwitch.new(self, item["binary_switch_id"])
+        BinarySwitch.new(self, item)
       end
     end
 
     class BinarySwitch
-      def initialize(client, binary_switch_id = nil)
+      def initialize(client, binary_switch_id = nil, attributes = {})
+        if binary_switch_id === Hash
+          binary_switch_id = binary_switch_id.delete("binary_switch_id")
+          attributes = binary_switch_id
+        end
+
         @client           = client
         @binary_switch_id = binary_switch_id
+        @name             = attributes.delete("name")
       end
 
       attr_reader :client, :binary_switch_id
+
+      # Attributes
+      attr_reader :name
 
       def users
         response = client.get('/binary_switches{/binary_switch}/users', :binary_switch => binary_switch_id)
