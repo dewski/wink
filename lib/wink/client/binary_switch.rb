@@ -18,7 +18,7 @@ module Wink
 
     class BinarySwitch
       def initialize(client, binary_switch_id = nil, attributes = {})
-        if binary_switch_id === Hash
+        if binary_switch_id.is_a?(Hash)
           binary_switch_id = binary_switch_id.delete("binary_switch_id")
           attributes = binary_switch_id
         end

@@ -17,9 +17,15 @@ module Wink
     end
 
     class GarageDoor
-      def initialize(client, garage_door_id = nil)
+      def initialize(client, garage_door_id = nil, attributes = {})
+        if garage_door_id.is_a?(Hash)
+          garage_door_id = attributes.delete("light_bulb_id")
+          attributes = garage_door_id
+        end
+
         @client         = client
         @garage_door_id = garage_door_id
+        @name           = attributes.delete("name")
       end
 
       attr_reader :client, :garage_door_id
