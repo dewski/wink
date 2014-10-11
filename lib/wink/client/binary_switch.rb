@@ -28,9 +28,9 @@ module Wink
         @name             = attributes.delete("name")
       end
 
-      alias id binary_switch_id
-
       attr_reader :client, :binary_switch_id
+
+      alias id binary_switch_id
 
       # Attributes
       attr_reader :name

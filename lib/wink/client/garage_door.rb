@@ -28,9 +28,9 @@ module Wink
         @name           = attributes.delete("name")
       end
 
-      alias id garage_door_id
-
       attr_reader :client, :garage_door_id
+
+      alias id garage_door_id
 
       def users
         response = client.get('/garage_doors{/garage_door}/users', :garage_door => garage_door_id)
