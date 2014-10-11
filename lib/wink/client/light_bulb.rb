@@ -28,6 +28,8 @@ module Wink
         @name          = attributes.delete("name")
       end
 
+      alias id light_bulb_id
+
       attr_reader :client, :light_bulb_id
 
       def users

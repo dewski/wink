@@ -28,6 +28,8 @@ module Wink
         @name           = attributes.delete("name")
       end
 
+      alias id garage_door_id
+
       attr_reader :client, :garage_door_id
 
       def users
