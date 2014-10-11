@@ -12,14 +12,20 @@ module Wink
     def light_bulbs
       response = get('/users/me/light_bulbs')
       response.body["data"].collect do |item|
-        LightBulb.new(self, item["light_bulb_id"])
+        LightBulb.new(self, item)
       end
     end
 
     class LightBulb
-      def initialize(client, light_bulb_id = nil)
+      def initialize(client, light_bulb_id = nil, attributes = {})
+        if light_bulb_id === Hash
+          light_bulb_id = light_bulb_id.delete("light_bulb_id")
+          attributes = light_bulb_id
+        end
+
         @client        = client
         @light_bulb_id = light_bulb_id
+        @name          = attributes.delete("name")
       end
 
       attr_reader :client, :light_bulb_id
