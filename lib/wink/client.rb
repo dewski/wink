@@ -42,6 +42,30 @@ module Wink
       end
     end
 
+    # Public: Lookup an individual binary switch connected to your Wink Hub.
+    #
+    # device - The Hash data of the device or device id to lookup.
+    #
+    # Returns Wink::Devices::BinarySwitch instance.
+    def binary_switch(device)
+      unless device.is_a?(Hash)
+        response = client.get('/binary_switches{/binary_switch}', :binary_switch => device)
+        device   = response.body["data"]
+      end
+
+      Devices::BinarySwitch.new(self, device)
+    end
+
+    # Public: Lookup all binary switches connected to your Wink Hub.
+    #
+    # Returns Array of Wink::Devices::BinarySwitch instances.
+    def binary_switches
+      response = get('/users/me/binary_switches')
+      response.body["data"].collect do |device|
+        Devices::BinarySwitch.new(self, device)
+      end
+    end
+
     # Public: Lookup an individual garage door connected to your Wink Hub.
     #
     # device - The Hash data of the device or device id to lookup.
