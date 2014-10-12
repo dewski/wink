@@ -84,5 +84,4 @@ module Wink
 end
 
 require "wink/client/binary_switch"
-require "wink/client/light_bulb"
 require "wink/client/garage_door"
