@@ -6,7 +6,7 @@ module Wink
       def initialize(client, device)
         super
 
-        @device_id  = device["light_bulb_id"]
+        @device_id  = device.fetch("light_bulb_id")
         @name       = device["name"]
         @powered    = device["last_reading"]["powered"]
         @brightness = device["last_reading"]["brightness"]

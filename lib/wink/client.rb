@@ -18,6 +18,30 @@ module Wink
       end
     end
 
+    # Public: Lookup an individual light bulb device from your Wink Hub.
+    #
+    # light_bulb - The Hash data of the device or device id to lookup.
+    #
+    # Returns Wink::Devices::LightBulb instance.
+    def light_bulb(device)
+      unless device.is_a?(Hash)
+        response = client.get('/light_bulbs{/light_bulb}', :light_bulb => device)
+        device   = response.body["data"]
+      end
+
+      Devices::LightBulb.new(self, device)
+    end
+
+    # Public: Lookup all connected light bulbs to your Wink Hub.
+    #
+    # Returns Array of Wink::Devices::LightBulb instances.
+    def light_bulbs
+      response = get('/users/me/light_bulbs')
+      response.body["data"].collect do |device|
+        Devices::LightBulb.new(self, device)
+      end
+    end
+
     # Public: Lookup an individual garage door connected to your Wink Hub.
     #
     # device - The Hash data of the device or device id to lookup.
