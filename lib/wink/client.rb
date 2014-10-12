@@ -18,6 +18,30 @@ module Wink
       end
     end
 
+    # Public: Lookup an individual garage door connected to your Wink Hub.
+    #
+    # device - The Hash data of the device or device id to lookup.
+    #
+    # Returns Wink::Devices::GarageDoor instance.
+    def garage_door(device)
+      unless device.is_a?(Hash)
+        response = client.get('/garage_doors{/garage_door}', :garage_door => device)
+        device   = response.body["data"]
+      end
+
+      Devices::GarageDoor.new(self, device)
+    end
+
+    # Public: Lookup all connected garage doors to your Wink Hub.
+    #
+    # Returns Array of Wink::Devices::GarageDoor instances.
+    def garage_doors
+      response = get('/users/me/garage_doors')
+      response.body["data"].collect do |device|
+        Devices::GarageDoor.new(self, device)
+      end
+    end
+
     def connection
       @connection ||= Faraday.new(Wink.endpoint) do |conn|
         conn.options[:timeout]      = 5
@@ -82,6 +106,3 @@ module Wink
     end
   end
 end
-
-require "wink/client/binary_switch"
-require "wink/client/garage_door"
