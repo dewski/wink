@@ -25,7 +25,7 @@ module Wink
     # Returns Wink::Devices::LightBulb instance.
     def light_bulb(device)
       unless device.is_a?(Hash)
-        response = client.get('/light_bulbs{/light_bulb}', :light_bulb => device)
+        response = get('/light_bulbs{/light_bulb}', :light_bulb => device)
         device   = response.body["data"]
       end
 
@@ -49,7 +49,7 @@ module Wink
     # Returns Wink::Devices::BinarySwitch instance.
     def binary_switch(device)
       unless device.is_a?(Hash)
-        response = client.get('/binary_switches{/binary_switch}', :binary_switch => device)
+        response = get('/binary_switches{/binary_switch}', :binary_switch => device)
         device   = response.body["data"]
       end
 
@@ -73,7 +73,7 @@ module Wink
     # Returns Wink::Devices::GarageDoor instance.
     def garage_door(device)
       unless device.is_a?(Hash)
-        response = client.get('/garage_doors{/garage_door}', :garage_door => device)
+        response = get('/garage_doors{/garage_door}', :garage_door => device)
         device   = response.body["data"]
       end
 

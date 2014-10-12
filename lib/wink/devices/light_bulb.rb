@@ -66,7 +66,9 @@ module Wink
       end
 
       def reload
-        new(refresh)
+        refresh
+        @device = client.light_bulb(device_id)
+        self
       end
 
       private

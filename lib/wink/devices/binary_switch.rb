@@ -46,6 +46,12 @@ module Wink
         response.body["data"]
       end
 
+      def reload
+        refresh
+        @device = client.binary_switch(device_id)
+        self
+      end
+
       private
 
       def set_state(state)

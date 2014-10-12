@@ -43,7 +43,9 @@ module Wink
       end
 
       def reload
-        new(refresh)
+        refresh
+        @device = client.garage_door(device_id)
+        self
       end
 
       private
