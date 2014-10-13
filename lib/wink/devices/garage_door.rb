@@ -4,12 +4,16 @@ module Wink
       def initialize(client, device)
         super
 
-        @device_id  = device.fetch("garage_door_id")
-        @name       = device["name"]
-        @position   = device["last_reading"]["position"]
+        @device_id = device.fetch("garage_door_id")
       end
 
-      attr_reader :name, :position
+      def name
+        device["name"]
+      end
+
+      def position
+        device["last_reading"]["position"]
+      end
 
       def users
         response = client.get('/garage_doors{/garage_door}/users', :garage_door => device_id)

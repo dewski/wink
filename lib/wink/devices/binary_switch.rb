@@ -5,11 +5,15 @@ module Wink
         super
 
         @device_id = device.fetch("binary_switch_id")
-        @name      = device["name"]
-        @powered   = device["last_reading"]["powered"]
       end
 
-      attr_reader :name, :powered
+      def name
+        device["name"]
+      end
+
+      def powered
+        device["last_reading"]["powered"]
+      end
 
       def users
         response = client.get('/binary_switches{/binary_switch}/users', :binary_switch => device_id)

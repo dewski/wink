@@ -7,12 +7,19 @@ module Wink
         super
 
         @device_id  = device.fetch("light_bulb_id")
-        @name       = device["name"]
-        @powered    = device["last_reading"]["powered"]
-        @brightness = device["last_reading"]["brightness"]
       end
 
-      attr_reader :name, :powered, :brightness
+      def name
+        device["name"]
+      end
+
+      def powered
+        device["last_reading"]["powered"]
+      end
+
+      def brightness
+        device["last_reading"]["brightness"]
+      end
 
       def users
         response = client.get('/light_bulbs{/light_bulb}/users', :light_bulb => device_id)
