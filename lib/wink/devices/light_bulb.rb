@@ -74,7 +74,8 @@ module Wink
 
       def reload
         refresh
-        @device = client.light_bulb(device_id)
+        response = client.get('/light_bulbs{/light_bulb}', :light_bulb => device_id)
+        @device = response.body["data"]
         self
       end
 

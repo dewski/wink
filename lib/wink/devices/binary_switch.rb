@@ -52,7 +52,8 @@ module Wink
 
       def reload
         refresh
-        @device = client.binary_switch(device_id)
+        response = client.get('/binary_switches{/binary_switch}', :binary_switch => device_id)
+        @device = response.body["data"]
         self
       end
 

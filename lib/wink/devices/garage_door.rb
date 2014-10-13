@@ -48,7 +48,8 @@ module Wink
 
       def reload
         refresh
-        @device = client.garage_door(device_id)
+        response = client.get('/garage_doors{/garage_door}', :garage_door => device_id)
+        @device = response.body["data"]
         self
       end
 
