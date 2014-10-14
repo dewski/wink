@@ -60,19 +60,19 @@ light_bulb.off? # => true
 Controlling garage doors:
 
 ```ruby
-light_bulb = client.light_bulbs.find(400)
-light_bulb.position # => 0
-light_bulk.open
-light_bulk.open?
-light_bulb.closed?
-light_bulb.close
-light_bulb.opening?
+door = client.garage_doors.find(1)
+door.position # => 0
+door.open
+door.open?
+door.closed?
+door.close
+door.opening?
 ```
 
 List subscriptions for each device:
 
 ```
-light_bulk.subscriptions
+light_bulb.subscriptions
 ```
 
 Create subscription for device:
