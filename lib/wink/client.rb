@@ -5,6 +5,33 @@ require "addressable/template"
 
 module Wink
   class Client
+
+    # Public: Lookup all scenes on your Wink account.
+    #
+    # Returns Array of Wink::Scene instances.
+    def scenes
+      response = get('/users/me/scenes')
+      response.body["data"].collect do |scene|
+        Scene.new(self, scene)
+      end
+    end
+
+    # Public: Lookup an individual scene on your Wink account.
+    #
+    # scene - The id or name of the scene to look up.
+    #
+    # Returns Wink::Scene instance.
+    def scene(scene_identifier)
+      if scene_identifier.is_a?(Numeric) || scene_identifier.to_i.to_s == scene_identifier
+        # passed in a scene id
+        response = get('/scenes{/scene}', :scene => scene_identifier)
+        Scene.new(self, response.body['data'])
+      else
+        # passed in a name
+        scenes.detect{|s| s.name.downcase == scene_identifier.downcase}
+      end
+    end
+
     def devices
       response = get('/users/me/wink_devices')
       response.body["data"].collect do |device|
