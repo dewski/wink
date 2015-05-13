@@ -69,6 +69,38 @@ door.close
 door.opening?
 ```
 
+List scenes (Shortcuts in the Wink App):
+
+```ruby
+client = Wink::Client.new
+client.scenes
+```
+
+Find a scene:
+
+```ruby
+client = Wink::Client.new
+
+# find by name
+scene = client.scene('Good Night')
+scene.name
+scene.id
+
+# find by id
+scene = client.scene(34322)
+scene.name
+scene.id
+```
+
+Activate a scene:
+
+```ruby
+client = Wink::Client.new
+
+scene = client.scene('Good Night')
+scene.activate
+```
+
 List subscriptions for each device:
 
 ```
