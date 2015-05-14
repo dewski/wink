@@ -26,7 +26,7 @@ module Wink
         }
       }
 
-      response = client.post('/groups{/group}/activate', :group => group_id, :body => body))
+      response = client.post('/groups{/group}/activate', :group => group_id, :body => body)
       response.success?
     end
 
