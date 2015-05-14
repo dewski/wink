@@ -19,6 +19,27 @@ module Wink
       group['name']
     end
 
+    def on
+      set_state true
+    end
+
+    def off
+      set_state false
+    end
+
+    def dim(scale)
+      body = {
+        :desired_state => {
+          :powered => true,
+          :brightness => scale
+        }
+      }
+
+      update(body)
+    end
+
+    private
+
     def set_state(state)
       body = {
         :desired_state => {
@@ -26,6 +47,10 @@ module Wink
         }
       }
 
+      update(body)
+    end
+
+    def update(body)
       response = client.post('/groups{/group}/activate', :group => group_id, :body => body)
       response.success?
     end
