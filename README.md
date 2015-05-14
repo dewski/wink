@@ -69,6 +69,40 @@ door.close
 door.opening?
 ```
 
+List groups of devices:
+
+```ruby
+client = Wink::Client.new
+client.groups
+```
+
+Find a group:
+
+```ruby
+client = Wink::Client.new
+
+# find by name
+group = client.group('Living Room')
+group.name
+group.id
+
+# find by id
+group = client.group(2322322)
+group.name
+group.id
+```
+
+Adjust a group:
+
+```ruby
+client = Wink::Client.new
+
+group = client.group('Living Room')
+group.on
+group.off
+group.dim(0.05)
+```
+
 List scenes (Shortcuts in the Wink App):
 
 ```ruby

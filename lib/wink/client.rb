@@ -6,6 +6,32 @@ require "addressable/template"
 module Wink
   class Client
 
+    # Public: Lookup all groups on your Wink account.
+    #
+    # Returns Array of Wink::Group instances.
+    def groups
+      response = get('/users/me/groups')
+      response.body["data"].collect do |group|
+        Group.new(self, group)
+      end
+    end
+
+    # Public: Lookup an individual group on your Wink account.
+    #
+    # group - The id or name of the group to look up.
+    #
+    # Returns Wink::Group instance.
+    def group(group_identifier)
+      if group_identifier.is_a?(Numeric) || group_identifier.to_i.to_s == group_identifier
+        # passed in a group id
+        response = get('/groups{/group}', :group => group_identifier)
+        Group.new(self, response.body['data'])
+      else
+        # passed in a name
+        groups.detect{|g| g.name.downcase == group_identifier.downcase}
+      end
+    end
+
     # Public: Lookup all scenes on your Wink account.
     #
     # Returns Array of Wink::Scene instances.
